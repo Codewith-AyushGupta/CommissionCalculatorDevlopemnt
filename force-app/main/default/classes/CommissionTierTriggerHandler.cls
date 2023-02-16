@@ -4,10 +4,10 @@
 */
 
 public class CommissionTierTriggerHandler {
-    public static void CommissionTierTriggerHelper(map<id,Commission_Tier__c> CommissionTiers)
+    public static void commissionTierTriggerHelper(Map<id,Commission_Tier__c> CommissionTiers)
     {
-        list<Commission_Tier__c> allCommissionTiers = new list<Commission_Tier__c>(); 
-        set<id> commissionMasterIds = new set<id>();
+        List<Commission_Tier__c> allCommissionTiers = new List<Commission_Tier__c>(); 
+       	Set<id> commissionMasterIds = new Set<id>();
         for(Commission_Tier__c tier : CommissionTiers.values())
         {
             if(tier.commission_master__c != NULL)
@@ -15,9 +15,9 @@ public class CommissionTierTriggerHandler {
                 commissionMasterIds.add(tier.commission_master__c);
             }
         }
-        string CommissionType  =commissionCalculatorconstants.RectroActive;
-        allCommissionTiers =CommissionTierSelector.getRetroactiveTiersByCommissionMaster(commissionMasterIds,CommissionType);
-        set<id> repeatingCommissionMasterId = new set<id>();
+        String commissionType  =CommissionCalculatorconstants.rectroActive;  // this veriable is for search rectroactive commission tier  the value were stored in the constant class
+        allCommissionTiers =CommissionTierSelector.getRetroactiveTiersByCommissionMaster(commissionMasterIds,commissionType);
+        Set<id> repeatingCommissionMasterId = new Set<id>();
         for(Commission_Tier__c tier : allCommissionTiers)
         {
             if(repeatingCommissionMasterId.contains(tier.commission_master__c))
